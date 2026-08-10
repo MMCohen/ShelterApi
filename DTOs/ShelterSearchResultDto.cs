@@ -1,6 +1,6 @@
 ﻿namespace ShelterApi.DTOs;
 
-public class SheltersByFilterDTO
+public class ShelterSearchResultDto
 {
     public int Id { get; set; }
     public string Name { get; set; }
