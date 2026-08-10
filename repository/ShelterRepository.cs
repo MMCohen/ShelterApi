@@ -124,5 +124,24 @@ public class ShelterRepository : IShelterRepository
         return shelters;
     }
 
+    public async Task<IEnumerable<InspectionDetailedDto>> InspectionDetailedAsync()
+    {
+        var shelters = await _context.Inspections
+            .Include(i => i.Shelter)
+            .Include(i => i.Shelter.Area)
+            .Select(i => new InspectionDetailedDto
+            {
+                InspectionId = i.Id,
+                InspectionDate = i.InspectionDate,
+                ReadinessScore = i.ReadinessScore,
+                Passed = i.Passed,
+                ShelterName = i.Shelter.Name,
+                City = i.Shelter.Area.City,
+                Neighborhood = i.Shelter.Area.Neighborhood
+            })
+            .ToListAsync();
+
+        return shelters;
+    }
 
 }
