@@ -12,6 +12,7 @@ namespace ShelterApi.repository
         Task<IEnumerable<InspectionDetailedDto>> InspectionDetailedAsync();
         Task<IEnumerable<ShelterWithInspectionCountDto>> SheltersWithInspectionCountAsync();
         Task<IEnumerable<FailedInspectionDto>> FailedInspectionsAsync();
+        Task<IEnumerable<AreaStatisticsDto>> AreasStatisticsAsync();
 
     }
 }

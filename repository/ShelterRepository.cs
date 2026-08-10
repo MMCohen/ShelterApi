@@ -176,4 +176,21 @@ public class ShelterRepository : IShelterRepository
         return shelters;
     }
 
+    public async Task<IEnumerable<AreaStatisticsDto>> AreasStatisticsAsync()
+    {
+        var shelters = await _context.Areas
+            .Include(a => a.Shelters)
+            .Select(a => new AreaStatisticsDto
+            {
+                City = a.City,
+                Neighborhood = a.Neighborhood,
+                ShelterCount = a.Shelters.Count(),
+                TotalCapacity = a.Shelters.Sum(s => s.Capacity)
+            })
+            .ToListAsync();
+
+        return shelters;
+    }
+
+
 }

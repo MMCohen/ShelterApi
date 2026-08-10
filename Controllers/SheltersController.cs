@@ -60,4 +60,7 @@ public class SheltersController : ControllerBase
         var shelters = await _repository.SheltersWithInspectionCountAsync();
         return Ok(shelters);
     }
+
+
+
 }
