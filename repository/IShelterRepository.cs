@@ -11,6 +11,7 @@ namespace ShelterApi.repository
         Task<IEnumerable<ShelterSortedDto>> SheltersSortedAsync(SortByEnum sortBy, bool ascending);
         Task<IEnumerable<InspectionDetailedDto>> InspectionDetailedAsync();
         Task<IEnumerable<ShelterWithInspectionCountDto>> SheltersWithInspectionCountAsync();
+        Task<IEnumerable<FailedInspectionDto>> FailedInspectionsAsync();
 
     }
 }

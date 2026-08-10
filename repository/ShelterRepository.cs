@@ -159,4 +159,21 @@ public class ShelterRepository : IShelterRepository
         return shelters;
     }
 
+    public async Task<IEnumerable<FailedInspectionDto>> FailedInspectionsAsync()
+    {
+        var shelters = await _context.Inspections
+            .Where(i => i.Passed == false)
+            .Select(i => new FailedInspectionDto
+            {
+                InspectionId = i.Id,
+                InspectionDate = i.InspectionDate,
+                ReadinessScore = i.ReadinessScore,
+                DefectsCount = i.DefectsCount,
+                ShelterName = i.Shelter.Name,
+                City = i.Shelter.Area.City,
+            })
+            .ToListAsync();
+        return shelters;
+    }
+
 }

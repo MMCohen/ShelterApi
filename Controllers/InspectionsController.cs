@@ -22,6 +22,14 @@ public class InspectionsController : ControllerBase
         return Ok(shelters);
     }
 
+    // /api/inspections/failed
+    [HttpGet("failed")]
+    public async Task<ActionResult<IEnumerable<FailedInspectionDto>>> FailedInspectionsAsync()
+    {
+        var shelters = await _repository.FailedInspectionsAsync();
+        return Ok(shelters);
+    }
+
 
 
 
