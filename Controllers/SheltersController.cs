@@ -52,4 +52,12 @@ public class SheltersController : ControllerBase
         return Ok(shelters);
     }
 
+
+    // api/shelters/with-inspection-count
+    [HttpGet("with-inspection-count")]
+    public async Task<ActionResult<IEnumerable<ShelterWithInspectionCountDto>>> SheltersWithInspectionCountAsync()
+    {
+        var shelters = await _repository.SheltersWithInspectionCountAsync();
+        return Ok(shelters);
+    }
 }

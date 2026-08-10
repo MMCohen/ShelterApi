@@ -144,4 +144,19 @@ public class ShelterRepository : IShelterRepository
         return shelters;
     }
 
+    public async Task<IEnumerable<ShelterWithInspectionCountDto>> SheltersWithInspectionCountAsync()
+    {
+        var shelters = await _context.Shelters
+            .Include(s => s.Inspections)
+            .Select(s => new ShelterWithInspectionCountDto
+            {
+                ShelterId = s.Id,
+                ShelterName = s.Name,
+                InspectionCount = s.Inspections.Count
+            })
+            .ToListAsync();
+
+        return shelters;
+    }
+
 }

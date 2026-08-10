@@ -10,6 +10,7 @@ namespace ShelterApi.repository
         Task<IEnumerable<ShelterSearchResultDto>> SearchAsync(string? city, int? minCapacity, bool? isAccessible, bool? isPublic);
         Task<IEnumerable<ShelterSortedDto>> SheltersSortedAsync(SortByEnum sortBy, bool ascending);
         Task<IEnumerable<InspectionDetailedDto>> InspectionDetailedAsync();
+        Task<IEnumerable<ShelterWithInspectionCountDto>> SheltersWithInspectionCountAsync();
 
     }
 }
