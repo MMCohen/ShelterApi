@@ -36,17 +36,6 @@ public class SheltersDbContext : DbContext
             .HasForeignKey(i => i.ShelterId)
             .OnDelete(DeleteBehavior.Cascade);
 
-            
-
-        //modelBuilder.Entity<Area>()
-        //    .HasMany(a => a.Shelters)
-        //    .WithOne(s => s.Area)
-        //    .HasForeignKey(s => s.AreaId);
-
-        //modelBuilder.Entity<Shelter>()
-        //    .HasMany(s => s.Inspections)
-        //    .WithOne(i => i.Shelter)
-        //    .HasForeignKey(i => i.ShelterId);
     }
 }
 

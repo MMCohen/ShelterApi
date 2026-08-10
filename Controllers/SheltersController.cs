@@ -29,4 +29,16 @@ public class SheltersController : ControllerBase
         return Ok(shelters);
     }
 
+    [HttpGet("search")]
+    public async Task<ActionResult<SheltersByFilterDTO>> SearchAsync( 
+        [FromQuery] string? city,
+        [FromQuery] int? minCapacity,
+        [FromQuery] bool? isAccessible,
+        [FromQuery] bool? isPublic
+        )
+    {
+        var shelters = await _repository.SearchAsync(city, minCapacity, isAccessible, isPublic);
+        return Ok(shelters);
+    }
+
 }

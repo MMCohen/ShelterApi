@@ -31,4 +31,53 @@ public class ShelterRepository : IShelterRepository
 
         return shelters;
     }
+
+    public async Task<IEnumerable<SheltersByFilterDTO>> SearchAsync(string? city, int? minCapacity, bool? isAccessible, bool? isPublic)
+    {
+        var query = _context.Shelters
+            .Include(s => s.Area)
+            .AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(city))
+        {
+            query = query
+                .Where(s => s.Area.City == city)
+                .AsQueryable();
+        }
+
+        if (minCapacity.HasValue)
+        {
+            query = query
+                .Where(s => s.Capacity >= minCapacity)
+                .AsQueryable();
+        }
+
+        if (isAccessible.HasValue)
+        {
+            query = query
+                .Where(s => s.IsAccessible == isAccessible)
+                .AsQueryable();
+        }
+
+        if (isPublic.HasValue)
+        {
+            query = query
+                .Where(s => s.IsPublic == isPublic)
+                .AsQueryable();
+        }
+
+        var shelters = await query
+            .Select(s => new SheltersByFilterDTO
+            {
+                Id = s.Id,
+                Name = s.Name,
+                Street = s.Street,
+                Capacity = s.Capacity,
+                IsAccessible = s.IsAccessible,
+                City = s.Area.City
+            })
+            .ToListAsync();
+
+        return shelters;
+    }
 }
